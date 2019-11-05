@@ -1,8 +1,9 @@
 {
-  "name": "gatsby-plugin-awesome-i18next",
+  "name": "@dontepsu/gatsby-plugin-awesome-i18next",
   "version": "1.0.0",
   "description": "Gatsby plugin to integrate i18next",
   "author": "Patrik Keinonen <patrik@wirmark.com>",
+  "keywords": [ "gatsby", "i18n", "i18next", "localization", "localisation", "translation", "translate" ],
   "dependencies": {
     "i18next": "^17.0.18",
     "langtag-utils": "^1.1.5",
@@ -38,5 +39,9 @@
     "tslint": "tslint --project .",
     "prepublish": "npm run build"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dontepsu/gatsby-plugin-awesome-i18next.git"
+  }
 }
