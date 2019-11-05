@@ -1,6 +1,6 @@
 {
   "name": "@dontepsu/gatsby-plugin-awesome-i18next",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gatsby plugin to integrate i18next",
   "author": "Patrik Keinonen <patrik@wirmark.com>",
   "keywords": [
@@ -51,5 +51,14 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dontepsu/gatsby-plugin-awesome-i18next.git"
+  },
+  "homepage": "https://github.com/dontepsu/gatsby-plugin-awesome-i18next#readme",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dontepsu/gatsby-plugin-awesome-i18next/issues"
+  },
+  "directories": {
+    "lib": "lib",
+    "fragments": "fragments"
   }
 }
