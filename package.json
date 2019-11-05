@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "Gatsby plugin to integrate i18next",
   "author": "Patrik Keinonen <patrik@wirmark.com>",
-  "keywords": [ "gatsby", "i18n", "i18next", "localization", "localisation", "translation", "translate" ],
+  "keywords": [
+    "gatsby",
+    "i18n",
+    "i18next",
+    "localization",
+    "localisation",
+    "translation",
+    "translate"
+  ],
   "dependencies": {
     "i18next": "^17.0.18",
     "langtag-utils": "^1.1.5",
