@@ -5,7 +5,6 @@ export type LocalizedPathConfig = Record<string, Record<string, string>>;
 
 const createRegex = (path: string): RegExp => {
   const r = path.replace(/(:(.*?)\/)|\*/gi, '[^\/]*/');
-  console.log(r);
   const matcher = new RegExp(`^${r}$`, 'i');
 
   return matcher;
