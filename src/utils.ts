@@ -4,7 +4,7 @@ export const isBrowser = () => typeof window !== 'undefined';
 export type LocalizedPathConfig = Record<string, Record<string, string>>;
 
 const createRegex = (path: string): RegExp => {
-  const r = path.replace(/(:(.*?)\/)|\*/gi, '[^\/]*/');
+  const r = path.replace(/(:(.*?)(\/|$))|\*/gi, '[^\/]*/?');
   const matcher = new RegExp(`^${r}$`, 'i');
 
   return matcher;
@@ -34,12 +34,13 @@ export const resolveLocalizedPath = (config: LocalizedPathConfig) => {
   const matchers = getMatchers(config);
 
   return (path: string, locale: string): string => {
-    const localePathLink = matchers.find(m => m.matcher.test(path)) || {} as any;
+    const localePathLink = matchers.find(m => m.matcher.test(path.split('?')[0])) || {} as any;
     const localePath = config[localePathLink.key];
 
     if (localePath && localePath[locale]) {
+      const [ p, search ] = path.split('?');
       const localePathSplit = localePath[locale].split('/');
-      const pathSplit = path.split('/');
+      const pathSplit = p.split('/');
 
       const localized = localePathSplit.reduce((acc: string[], c: string, index: number) => {
         if (c.startsWith(':')) {
@@ -51,7 +52,13 @@ export const resolveLocalizedPath = (config: LocalizedPathConfig) => {
         return acc;
       }, []);
 
-      return localized.join('/');
+      let localizedPath = localized.join('/');
+
+      if (search) {
+        localizedPath += '?' + search;
+      }
+
+      return localizedPath;
     }
 
     return path;
