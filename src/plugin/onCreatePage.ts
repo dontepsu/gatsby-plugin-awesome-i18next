@@ -57,7 +57,7 @@ export async function onCreatePage ({ page, actions }, pluginOptions: PluginOpti
           originalPath: page.path,
           siteUrl,
           i18nextOptions,
-          resolvePath,
+          localizedPathsConfig: localizedPaths,
         },
       };
 

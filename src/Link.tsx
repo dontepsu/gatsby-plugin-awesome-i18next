@@ -1,6 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { Link as GatsbyLink, GatsbyLinkProps } from 'gatsby';
 import { I18nConsumer } from './I18nContext';
+import { resolveLocalizedPath } from './utils';
 
 const LinkComponent: React.FC<any> = ({ to, lng, resolvePath, children, ...rest }) => {
   return (
@@ -12,6 +13,6 @@ const LinkComponent: React.FC<any> = ({ to, lng, resolvePath, children, ...rest 
 
 export function Link<T> (props: GatsbyLinkProps<T>) {
   return (
-    <I18nConsumer>{({ lng, resolvePath }) => <LinkComponent lng={lng} resolvePath={resolvePath} {...props} />}</I18nConsumer>
+    <I18nConsumer>{({ lng, localizedPathsConfig }) => <LinkComponent lng={lng} resolvePath={resolveLocalizedPath(localizedPathsConfig)} {...props} />}</I18nConsumer>
   );
 }
