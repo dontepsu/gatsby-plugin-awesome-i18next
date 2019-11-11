@@ -4,8 +4,9 @@ export const isBrowser = () => typeof window !== 'undefined';
 export type LocalizedPathConfig = Record<string, Record<string, string>>;
 
 const createRegex = (path: string): RegExp => {
-  const r = path.replace(/\/(:(.*?)|\*)\//i, '/[^\/]*/');
-  const matcher = new RegExp(`^${r}?$`, 'i');
+  const r = path.replace(/(:(.*?)\/)|\*/gi, '[^\/]*/');
+  console.log(r);
+  const matcher = new RegExp(`^${r}$`, 'i');
 
   return matcher;
 };

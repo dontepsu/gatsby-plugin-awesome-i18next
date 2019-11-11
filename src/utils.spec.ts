@@ -17,6 +17,14 @@ const localizedUrls = {
     fi: '/tuotteet/:id/suositukset/',
     es: '/productos/:id/recommendaciones/',
   },
+  '/products/:category/:id/': {
+    fi: '/tuotteet/:category/:id/',
+    es: '/productos/:category/:id/',
+  },
+  '/products/:category/:id/recommendations/': {
+    fi: '/tuotteet/:category/:id/suositukset/',
+    es: '/productos/:category/:id/recommendaciones/',
+  },
   '/products/*': {
     fi: '/tuotteet/*',
     es: '/productos/*',
@@ -63,6 +71,17 @@ test('resolve url wildcard 1', () => {
 });
 
 test('resolve url wildcard 2', () => {
+  const path = '/products/chocolates/valor-chocolate/';
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
+
+  expect(fi).toEqual('/tuotteet/chocolates/valor-chocolate/');
+  expect(es).toEqual('/productos/chocolates/valor-chocolate/');
+  expect(en).toEqual('/products/chocolates/valor-chocolate/');
+});
+
+test('resolve url wildcard 3', () => {
   const path = '/products/valor-chocolate/recommendations/';
   const fi = resolveUrl(path, 'fi');
   const es = resolveUrl(path, 'es');
@@ -71,6 +90,17 @@ test('resolve url wildcard 2', () => {
   expect(fi).toEqual('/tuotteet/valor-chocolate/suositukset/');
   expect(es).toEqual('/productos/valor-chocolate/recommendaciones/');
   expect(en).toEqual('/products/valor-chocolate/recommendations/');
+});
+
+test('resolve url wildcard 4', () => {
+  const path = '/products/category/valor-chocolate/recommendations/';
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
+
+  expect(fi).toEqual('/tuotteet/category/valor-chocolate/suositukset/');
+  expect(es).toEqual('/productos/category/valor-chocolate/recommendaciones/');
+  expect(en).toEqual('/products/category/valor-chocolate/recommendations/');
 });
 
 const resolveMatchPath = resolveLocalizedMatchPath(localizedUrls);
