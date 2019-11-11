@@ -35,7 +35,16 @@ const localizedUrls = {
   },
 };
 
-const resolveUrl = resolveLocalizedPath(localizedUrls);
+const pathParameters = {
+  ':category': {
+    'chocolates': {
+      fi: 'suklaat',
+      es: 'chocolates',
+    },
+  },
+};
+
+const resolveUrl = resolveLocalizedPath(localizedUrls, pathParameters);
 
 test('resolve url basic', () => {
   const path = '/products/';
@@ -76,7 +85,7 @@ test('resolve url wildcard 2', () => {
   const es = resolveUrl(path, 'es');
   const en = resolveUrl(path, 'en');
 
-  expect(fi).toEqual('/tuotteet/chocolates/valor-chocolate/');
+  expect(fi).toEqual('/tuotteet/suklaat/valor-chocolate/');
   expect(es).toEqual('/productos/chocolates/valor-chocolate/');
   expect(en).toEqual('/products/chocolates/valor-chocolate/');
 });

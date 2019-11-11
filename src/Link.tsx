@@ -13,6 +13,7 @@ const LinkComponent: React.FC<any> = ({ to, lng, resolvePath, children, ...rest 
 
 export function Link<T> (props: GatsbyLinkProps<T>) {
   return (
-    <I18nConsumer>{({ lng, localizedPathsConfig }) => <LinkComponent lng={lng} resolvePath={resolveLocalizedPath(localizedPathsConfig)} {...props} />}</I18nConsumer>
+    <I18nConsumer>{({ lng, localizedPathsConfig, pathParametersLocalizations }) =>
+      <LinkComponent lng={lng} resolvePath={resolveLocalizedPath(localizedPathsConfig, pathParametersLocalizations)} {...props} />}</I18nConsumer>
   );
 }

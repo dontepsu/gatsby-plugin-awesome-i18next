@@ -1,7 +1,10 @@
+import { get } from 'lodash';
+
 // tslint:disable-next-line: strict-type-predicates
 export const isBrowser = () => typeof window !== 'undefined';
 
 export type LocalizedPathConfig = Record<string, Record<string, string>>;
+export type PathParameterLocalizations = Record<string, Record<string, Record<string, string>>>;
 
 const createRegex = (path: string): RegExp => {
   const r = path.replace(/(:(.*?)(\/|$))|\*/gi, '[^\/]*/?');
@@ -30,7 +33,7 @@ export const getMatchersFactory = () => {
 
 const getMatchers = getMatchersFactory();
 
-export const resolveLocalizedPath = (config: LocalizedPathConfig) => {
+export const resolveLocalizedPath = (config: LocalizedPathConfig, pathParametersLocalizations: PathParameterLocalizations = {}) => {
   const matchers = getMatchers(config);
 
   return (path: string, locale: string): string => {
@@ -44,7 +47,14 @@ export const resolveLocalizedPath = (config: LocalizedPathConfig) => {
 
       const localized = localePathSplit.reduce((acc: string[], c: string, index: number) => {
         if (c.startsWith(':')) {
-          acc[index] = pathSplit[index];
+          // try if path paramter can be localized
+          const localizedParam = get(pathParametersLocalizations, `${c}.${pathSplit[index]}.${locale}`);
+          if (localizedParam) {
+            acc[index] = localizedParam;
+          } else {
+            acc[index] = pathSplit[index];
+
+          }
         } else {
           acc[index] = localePathSplit[index];
         }

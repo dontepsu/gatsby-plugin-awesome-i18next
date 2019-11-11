@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { InitOptions } from 'i18next';
-import { resolveLocalizedPath, LocalizedPathConfig, resolveLocalizedMatchPath } from '../utils';
+import { resolveLocalizedPath, LocalizedPathConfig, resolveLocalizedMatchPath, PathParameterLocalizations } from '../utils';
 
 export interface PluginOptions {
   i18nextOptions: InitOptions;
@@ -8,17 +8,18 @@ export interface PluginOptions {
   availableLngs: string[];
   siteUrl: string;
   localizedPaths: LocalizedPathConfig;
+  pathParametersLocalizations: PathParameterLocalizations;
 }
 
 export async function onCreatePage ({ page, actions }, pluginOptions: PluginOptions) {
   const { createPage, deletePage } = actions;
-  const { fallbackLng, availableLngs, siteUrl, i18nextOptions, localizedPaths = {} } = pluginOptions;
+  const { fallbackLng, availableLngs, siteUrl, i18nextOptions, localizedPaths = {}, pathParametersLocalizations = {} } = pluginOptions;
 
   if (page.path.includes('dev-404')) {
     return Promise.resolve();
   }
 
-  const resolvePath = resolveLocalizedPath(localizedPaths);
+  const resolvePath = resolveLocalizedPath(localizedPaths, pathParametersLocalizations);
   const resolveMatchPath = resolveLocalizedMatchPath(localizedPaths);
 
   const pageContext = { ...page.context };
@@ -58,6 +59,7 @@ export async function onCreatePage ({ page, actions }, pluginOptions: PluginOpti
           siteUrl,
           i18nextOptions,
           localizedPathsConfig: localizedPaths,
+          pathParametersLocalizations,
         },
       };
 
