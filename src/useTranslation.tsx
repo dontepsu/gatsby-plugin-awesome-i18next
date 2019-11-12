@@ -20,7 +20,7 @@ export function useTranslation<AvailableLang = string> (namespaces: string[]): U
     url: `${context.siteUrl || ''}/${resolvePath(context.originalPath, i18n.language)}`,
   }));
   const changeLang = (lang: AvailableLang): void => {
-    navigate(`/${lang}resolvePath(context.originalPath, lang as any)`);
+    navigate(`/${lang}${resolvePath(context.originalPath, lang as any)}`);
   };
 
   return { t, i18n, context, resolvePath, resolveAllLanguageVersions, changeLang } as any;
