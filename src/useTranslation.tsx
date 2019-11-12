@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTranslation as _useTranslation, UseTranslationResponse } from 'react-i18next';
-import { I18nContext } from 'I18nContext';
-import { resolveLocalizedPath } from 'utils';
+import { I18nContext } from './I18nContext';
+import { resolveLocalizedPath } from './utils';
 import { navigate } from 'gatsby';
 
 export interface UseTranslation<AvailableLang> extends UseTranslationResponse {
