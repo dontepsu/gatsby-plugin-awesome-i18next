@@ -21,6 +21,7 @@ export function withI18next (Comp: any, options: WithI18nextOptions = {}): any {
         pageContext.fallbackLng,
         pageContext.i18nextOptions,
       );
+
       this.activateLng();
       if (options.afterI18nInit) {
         options.afterI18nInit(this.i18n);
