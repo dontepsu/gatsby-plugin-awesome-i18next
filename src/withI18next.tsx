@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { I18nextProvider, useTranslation } from 'react-i18next';
+import { I18nextProvider } from 'react-i18next';
 import { I18nProvider } from './I18nContext';
 import { setupI18next } from './plugin/setupI18next';
 import i18next from 'i18next';
@@ -62,7 +62,3 @@ export function withI18next (Comp: any, options: WithI18nextOptions = {}): any {
 
   return I18n;
 }
-
-export {
-  useTranslation,
-};
