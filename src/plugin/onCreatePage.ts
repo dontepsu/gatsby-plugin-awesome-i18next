@@ -25,7 +25,7 @@ export async function onCreatePage ({ page, actions }, pluginOptions: PluginOpti
   const pageContext = { ...page.context };
 
   return new Promise(resolve => {
-    const redirect = path.resolve('./.cache/awesome-i18next/redirect.js');
+    const redirect = path.resolve(__dirname, '../Redirect.js');
     const redirectPage = {
       ...page,
       component: redirect,
