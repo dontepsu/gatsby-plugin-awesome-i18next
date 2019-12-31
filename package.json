@@ -1,6 +1,6 @@
 {
   "name": "@dontepsu/gatsby-plugin-awesome-i18next",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Gatsby plugin to integrate i18next",
   "author": "Patrik Keinonen <patrik@wirmark.com>",
   "keywords": [
@@ -13,29 +13,32 @@
     "translate"
   ],
   "dependencies": {
-    "i18next": "^17.0.18",
     "langtag-utils": "^1.1.5",
-    "react-helmet": "^5.2.1",
-    "react-i18next": "^10.13.0"
+    "react-helmet": "^5.2.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.2",
-    "@types/jest": "^24.0.15",
     "@types/fs-extra": "^8.0.0",
+    "@types/helmet": "0.0.45",
+    "@types/jest": "^24.0.15",
     "@types/node": "^12.7.12",
-    "jest": "^24.8.0",
     "fs-extra": "^8.1.0",
     "gatsby": "^2.15.28",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
+    "i18next": "^17.0.18",
+    "jest": "^24.8.0",
+    "react": "^16.12.0",
+    "react-i18next": "^10.13.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.6.3",
     "tslint": "^5.18.0",
     "tslint-config-semistandard": "^8.0.1",
-    "tslint-react": "^4.0.0"
+    "tslint-react": "^4.0.0",
+    "typescript": "^3.7.3"
   },
   "peerDependencies": {
-    "gatsby": ">2.0.0"
+    "gatsby": ">2.0.0",
+    "react": ">16.12.0",
+    "i18next": ">17.0.18",
+    "react-i18next": ">10.13.0"
   },
   "scripts": {
     "build": "tsc",

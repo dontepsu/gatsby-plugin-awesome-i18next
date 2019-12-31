@@ -11,7 +11,7 @@ export interface UseTranslation<AvailableLang> extends UseTranslationResponse {
   changeLang (lang: AvailableLang): void;
 }
 
-export function useTranslation<AvailableLang = string> (namespaces: string[]): UseTranslation<AvailableLang> {
+export function useTranslation<AvailableLang = string> (namespaces: string[] = []): UseTranslation<AvailableLang> {
   const { t, i18n } = _useTranslation(namespaces);
   const context = React.useContext(I18nContext);
   const resolvePath = resolveLocalizedPath(context.localizedPathsConfig, context.pathParametersLocalizations);
