@@ -2,11 +2,9 @@ import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 import { useTranslation } from './useTranslation';
 
-export interface HeadProps {
-  hrefLang?: any;
-}
+export interface HeadProps {}
 
-export const Helmet: React.FC<HeadProps> = ({ children, hrefLang }) => {
+export const Helmet: React.FC<HeadProps> = ({ children }) => {
   const { i18n, resolveAllLanguageVersions } = useTranslation();
   const allLanguageVersions = React.useMemo(() => {
     return resolveAllLanguageVersions()
@@ -14,7 +12,7 @@ export const Helmet: React.FC<HeadProps> = ({ children, hrefLang }) => {
         key={v.lang}
         rel="alternate"
         href={v.url}
-        hrefLang={v.lang === i18n.language ? 'x-default' : hrefLang}
+        hrefLang={v.lang}
       />);
   }, []);
 
