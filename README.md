@@ -8,11 +8,11 @@ npm i -S @dontepsu/gatsby-plugin-awesome-i18next i18next react-i18next
 ```
 
 ## Usage
-To use to the plugin, you need to define the translations in a JSON file and add config objec to 'gatsby.config.js'.
+To use to the plugin, you need to define the translations in a JSON file and add config object to `gatsby.config.js`.
 
 ### Gatsby config
 
-In  gatsby-config define following configuration to the plugin. If localepath is not found, the plugin will use the key as default. Therefor localized path for locale `en` is not defined in the example below.
+In  gatsby-config define following configuration to the plugin.
 ```
 {
   resolve: `gatsby-plugin-awesome-i18next`,
