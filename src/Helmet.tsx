@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Helmet as ReactHelmet } from 'react-helmet';
 import { useTranslation } from './useTranslation';
 

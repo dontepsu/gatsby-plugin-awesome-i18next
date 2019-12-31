@@ -17,7 +17,7 @@ export function useTranslation<AvailableLang = string> (namespaces: string[] = [
   const resolvePath = resolveLocalizedPath(context.localizedPathsConfig, context.pathParametersLocalizations);
   const resolveAllLanguageVersions = (): { lang: string, url: string }[] => (context.availableLngs || []).map(lang => ({
     lang,
-    url: `${context.siteUrl || ''}/${resolvePath(context.originalPath, i18n.language)}`,
+    url: `${context.siteUrl || ''}/${lang}${resolvePath(context.originalPath, lang)}`,
   }));
   const changeLang = (lang: AvailableLang): void => {
     navigate(`/${lang}${resolvePath(context.originalPath, lang as any)}`);

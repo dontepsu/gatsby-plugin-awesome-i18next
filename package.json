@@ -1,6 +1,6 @@
 {
   "name": "@dontepsu/gatsby-plugin-awesome-i18next",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Gatsby plugin to integrate i18next",
   "author": "Patrik Keinonen <patrik@wirmark.com>",
   "keywords": [
