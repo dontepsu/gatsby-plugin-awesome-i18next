@@ -74,14 +74,3 @@ export const resolveLocalizedPath = (config: LocalizedPathConfig, pathParameters
     return path;
   };
 };
-
-export const resolveLocalizedMatchPath = (config: LocalizedPathConfig) => {
-  return (path: string, locale: string): string => {
-    const localPaths = config[path];
-    if (localPaths && localPaths[locale]) {
-      return localPaths[locale];
-    }
-
-    return path;
-  };
-};

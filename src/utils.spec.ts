@@ -1,4 +1,4 @@
-import { resolveLocalizedPath, resolveLocalizedMatchPath } from './utils';
+import { resolveLocalizedPath } from './utils';
 
 const localizedUrls = {
   '/products/': {
@@ -24,6 +24,10 @@ const localizedUrls = {
   '/products/:category/:id/recommendations': {
     fi: '/tuotteet/:category/:id/suositukset',
     es: '/productos/:category/:id/recommendaciones',
+  },
+  '/products/:category/:id/recommendations/*': {
+    fi: '/tuotteet/:category/:id/suositukset/*',
+    es: '/productos/:category/:id/recommendaciones/*',
   },
   '/products/*': {
     fi: '/tuotteet/*',
@@ -123,13 +127,11 @@ test('resolve url wildcard 4 with search', () => {
   expect(en).toEqual('/products/category/valor-chocolate/recommendations?foo=bar');
 });
 
-const resolveMatchPath = resolveLocalizedMatchPath(localizedUrls);
-
 test('resolve matchPath wildcard 1', () => {
   const path = '/products/:id';
-  const fi = resolveMatchPath(path, 'fi');
-  const es = resolveMatchPath(path, 'es');
-  const en = resolveMatchPath(path, 'en');
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
 
   expect(fi).toEqual('/tuotteet/:id');
   expect(es).toEqual('/productos/:id');
@@ -138,9 +140,9 @@ test('resolve matchPath wildcard 1', () => {
 
 test('resolve matchPath wildcard 2', () => {
   const path = '/products/:id/recommendations/';
-  const fi = resolveMatchPath(path, 'fi');
-  const es = resolveMatchPath(path, 'es');
-  const en = resolveMatchPath(path, 'en');
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
 
   expect(fi).toEqual('/tuotteet/:id/suositukset/');
   expect(es).toEqual('/productos/:id/recommendaciones/');
@@ -149,9 +151,9 @@ test('resolve matchPath wildcard 2', () => {
 
 test('resolve matchPath * 1', () => {
   const path = '/products/*';
-  const fi = resolveMatchPath(path, 'fi');
-  const es = resolveMatchPath(path, 'es');
-  const en = resolveMatchPath(path, 'en');
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
 
   expect(fi).toEqual('/tuotteet/*');
   expect(es).toEqual('/productos/*');
@@ -160,11 +162,22 @@ test('resolve matchPath * 1', () => {
 
 test('resolve matchPath * 2', () => {
   const path = '/products/*/recommendations/';
-  const fi = resolveMatchPath(path, 'fi');
-  const es = resolveMatchPath(path, 'es');
-  const en = resolveMatchPath(path, 'en');
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
 
   expect(fi).toEqual('/tuotteet/*/suositukset/');
   expect(es).toEqual('/productos/*/recommendaciones/');
   expect(en).toEqual('/products/*/recommendations/');
+});
+
+test('resolve matchPath with route params', () => {
+  const path = '/products/category/valor-chocolate/recommendations/*';
+  const fi = resolveUrl(path, 'fi');
+  const es = resolveUrl(path, 'es');
+  const en = resolveUrl(path, 'en');
+
+  expect(fi).toEqual('/tuotteet/category/valor-chocolate/suositukset/*');
+  expect(es).toEqual('/productos/category/valor-chocolate/recommendaciones/*');
+  expect(en).toEqual('/products/category/valor-chocolate/recommendations/*');
 });

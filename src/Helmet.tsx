@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Helmet as ReactHelmet } from 'react-helmet';
+import { Helmet as ReactHelmet, HelmetProps } from 'react-helmet';
 import { useTranslation } from './useTranslation';
 
-export interface HeadProps {}
+export interface HeadProps extends HelmetProps {}
 
 export const Helmet: React.FC<HeadProps> = ({ children }) => {
   const { i18n, resolveAllLanguageVersions } = useTranslation();

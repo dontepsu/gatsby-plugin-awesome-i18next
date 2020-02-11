@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { InitOptions } from 'i18next';
-import { resolveLocalizedPath, LocalizedPathConfig, resolveLocalizedMatchPath, PathParameterLocalizations } from '../utils';
+import { resolveLocalizedPath, LocalizedPathConfig, PathParameterLocalizations } from '../utils';
 
 export interface PluginOptions {
   i18nextOptions: InitOptions;
@@ -20,7 +20,6 @@ export async function onCreatePage ({ page, actions }, pluginOptions: PluginOpti
   }
 
   const resolvePath = resolveLocalizedPath(localizedPaths, pathParametersLocalizations);
-  const resolveMatchPath = resolveLocalizedMatchPath(localizedPaths);
 
   const pageContext = { ...page.context };
 
@@ -64,7 +63,7 @@ export async function onCreatePage ({ page, actions }, pluginOptions: PluginOpti
       };
 
       if (page.matchPath) {
-        localePage.matchPath = `/${lng}${resolveMatchPath(page.matchPath, lng)}`;
+        localePage.matchPath = `/${lng}${resolvePath(page.matchPath, lng)}`;
       }
 
       createPage(localePage);
