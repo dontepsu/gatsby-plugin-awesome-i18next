@@ -4,7 +4,7 @@ import { useTranslation } from './useTranslation';
 
 export interface HeadProps extends HelmetProps {}
 
-export const Helmet: React.FC<HeadProps> = ({ children }) => {
+export const Helmet: React.FC<HeadProps> = ({ children, ...props }) => {
   const { i18n, resolveAllLanguageVersions } = useTranslation();
   const allLanguageVersions = React.useMemo(() => {
     return resolveAllLanguageVersions()
@@ -17,7 +17,7 @@ export const Helmet: React.FC<HeadProps> = ({ children }) => {
   }, []);
 
   return (
-    <ReactHelmet>
+    <ReactHelmet {...props}>
       <html lang={i18n.language} />
       {allLanguageVersions}
       {children}
