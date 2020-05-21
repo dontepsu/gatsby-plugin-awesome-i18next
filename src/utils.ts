@@ -1,10 +1,8 @@
 import { get } from 'lodash';
+import { LocalizedPathConfig, PathParameterLocalizations } from 'types';
 
 // tslint:disable-next-line: strict-type-predicates
 export const isBrowser = () => typeof window !== 'undefined';
-
-export type LocalizedPathConfig = Record<string, Record<string, string>>;
-export type PathParameterLocalizations = Record<string, Record<string, Record<string, string>>>;
 
 const createRegex = (path: string): RegExp => {
   const r = path.replace(/(:(.*?)(\/|$))|\*/gi, '[^\/]*/?');
@@ -24,7 +22,7 @@ export const getMatchersFactory = () => {
   return (config: LocalizedPathConfig): Matcher[] => {
     if (!matchers) {
       matchers = Object.keys(config)
-      .map(key => ({ matcher: createRegex(key), key }));
+        .map(key => ({ matcher: createRegex(key), key }));
     }
 
     return matchers;
@@ -33,7 +31,9 @@ export const getMatchersFactory = () => {
 
 const getMatchers = getMatchersFactory();
 
-export const resolveLocalizedPath = (config: LocalizedPathConfig, pathParametersLocalizations: PathParameterLocalizations = {}) => {
+type NewType = PathParameterLocalizations;
+
+export const resolveLocalizedPath = (config: LocalizedPathConfig, pathParametersLocalizations: NewType = {}) => {
   const matchers = getMatchers(config);
 
   return (path: string, locale: string): string => {
@@ -41,7 +41,7 @@ export const resolveLocalizedPath = (config: LocalizedPathConfig, pathParameters
     const localePath = config[localePathLink.key];
 
     if (localePath && localePath[locale]) {
-      const [ p, search ] = path.split('?');
+      const [p, search] = path.split('?');
       const localePathSplit = localePath[locale].split('/');
       const pathSplit = p.split('/');
 

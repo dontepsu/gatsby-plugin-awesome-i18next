@@ -139,6 +139,49 @@ The urls
 },
 ```
 
+### Ignore paths
+Ignore paths that you don't want this plugin to process. You can use one of the following:
+1. Set of strings
+```
+{
+  resolve: `gatsby-plugin-awesome-i18next`,
+  options: {
+    availableLngs: ['en', 'fi'],
+    fallbackLng: 'en',
+    siteUrl: 'https://www.example.com/',
+    ignorePaths: new Set([
+      '/oauth-callback/',
+    ])
+  },
+},
+```
+2. Array of string 
+```
+{
+  resolve: `gatsby-plugin-awesome-i18next`,
+  options: {
+    availableLngs: ['en', 'fi'],
+    fallbackLng: 'en',
+    siteUrl: 'https://www.example.com/',
+    ignorePaths: [
+      '/oauth-callback/',
+    ]
+  },
+},
+```
+3. function => boolean
+```
+{
+  resolve: `gatsby-plugin-awesome-i18next`,
+  options: {
+    availableLngs: ['en', 'fi'],
+    fallbackLng: 'en',
+    siteUrl: 'https://www.example.com/',
+    ignorePaths: page => page.path.substr(0, path.length - 1) === '/oauth-callback'
+  },
+},
+```
+
 ### Linking to pages
 Plugin exports a `<Link />` component that takes a non localized url as `props.to`
 
@@ -154,6 +197,10 @@ const LinkComponent = () => {
 
 ## Contributors
 * Kodit.io - Europes #1 real estate instant buyer
+
+## Change log
+### 1.7.0
+* Ignore paths: Specify routes that you want this plugin to ignore
 
 ## License
 MIT

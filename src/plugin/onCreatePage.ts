@@ -1,19 +1,31 @@
 import * as path from 'path';
-import { InitOptions } from 'i18next';
-import { resolveLocalizedPath, LocalizedPathConfig, PathParameterLocalizations } from '../utils';
-
-export interface PluginOptions {
-  i18nextOptions: InitOptions;
-  fallbackLng: string;
-  availableLngs: string[];
-  siteUrl: string;
-  localizedPaths: LocalizedPathConfig;
-  pathParametersLocalizations: PathParameterLocalizations;
-}
+import { resolveLocalizedPath } from '../utils';
+import { PluginOptions } from 'types';
 
 export async function onCreatePage ({ page, actions }, pluginOptions: PluginOptions) {
   const { createPage, deletePage } = actions;
-  const { fallbackLng, availableLngs, siteUrl, i18nextOptions, localizedPaths = {}, pathParametersLocalizations = {} } = pluginOptions;
+  const {
+    fallbackLng,
+    availableLngs,
+    siteUrl,
+    i18nextOptions,
+    localizedPaths = {},
+    pathParametersLocalizations = {},
+    ignorePaths,
+  } = pluginOptions;
+
+  if (ignorePaths) {
+    if (Array.isArray(ignorePaths) && ignorePaths.includes(page.path)) {
+      return Promise.resolve();
+    }
+    if (typeof ignorePaths === 'function' && (await ignorePaths(page))) {
+      return Promise.resolve();
+    }
+
+    if ((ignorePaths as Set<string>).has && (ignorePaths as Set<string>).has(page.path)) {
+      return Promise.resolve();
+    }
+  }
 
   if (page.path.includes('dev-404')) {
     return Promise.resolve();
