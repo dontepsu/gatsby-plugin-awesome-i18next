@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { LocalizedPathConfig, PathParameterLocalizations } from 'utils';
+import { LocalizedPathConfig, PathParameterLocalizations } from 'types';
 
 export interface I18nContext {
   availableLngs: string[];
